@@ -1,11 +1,24 @@
 using web_programlama.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // PostgreSQL için ApplicationDbContext yapýlandýrmasý
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Identity servislerini ekle
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+})
+.AddRoles<IdentityRole>() // Rol desteði ekle
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Swagger dokümantasyonu için gerekli servisleri ekle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,6 +51,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Identity için kimlik doðrulama middleware'i ekle
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Varsayýlan route yapýlandýrmasý
