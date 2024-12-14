@@ -27,6 +27,16 @@ builder.Services.AddSwaggerGen();
 // MVC Controller ve View yapýlandýrmasý
 builder.Services.AddControllersWithViews();
 
+// Kestrel yapýlandýrmasý (HTTP ve HTTPS desteði)
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5000); // HTTP
+    options.ListenAnyIP(5001, listenOptions => listenOptions.UseHttps()); // HTTPS
+});
+
+// Rolleri ve admin hesabýný oluþturmak için servis ekle
+builder.Services.AddHostedService<RoleSeeder>();
+
 var app = builder.Build();
 
 // Hata yönetimi ve HSTS yapýlandýrmasý
@@ -37,7 +47,6 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    // Geliþtirme ortamýnda Swagger UI etkinleþtir
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -45,13 +54,10 @@ else
     });
 }
 
-// HTTPS yönlendirme, statik dosyalar ve yönlendirme
+// Middleware sýrasý
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-// Identity için kimlik doðrulama middleware'i ekle
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -60,7 +66,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// API Controller'larý için mapleme
 app.MapControllers();
 
 app.Run();

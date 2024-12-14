@@ -19,15 +19,20 @@ namespace web_programlama.Controllers
 
         public IActionResult Index()
         {
-            var salonSayisi = _context.Salonlar.Count();
-            var calisanSayisi = _context.Calisanlar.Count();
-            var randevuSayisi = _context.Randevular.Count();
+            // Null güvenliði ve tablo kontrolü
+            var salonSayisi = _context.Salonlar?.Count() ?? 0;
+            var calisanSayisi = _context.Calisanlar?.Count() ?? 0;
+            var randevuSayisi = _context.Randevular?.Count() ?? 0;
 
-            ViewData["SalonSayisi"] = salonSayisi;
-            ViewData["CalisanSayisi"] = calisanSayisi;
-            ViewData["RandevuSayisi"] = randevuSayisi;
+            // ViewData yerine ViewModel kullanýmý önerilir
+            var viewModel = new HomeIndexViewModel
+            {
+                ToplamSalonSayisi = salonSayisi,
+                ToplamCalisanSayisi = calisanSayisi,
+                ToplamRandevuSayisi = randevuSayisi
+            };
 
-            return View();
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

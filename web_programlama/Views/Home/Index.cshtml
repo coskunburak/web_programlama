@@ -1,14 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Ana Sayfa";
-}
+﻿<div class="text-center">
+    <h1 class="display-4 mb-4">Hoş Geldiniz</h1>
+    <p class="lead text-muted">Kuaför Yönetim Sistemi Genel Bakış</p>
 
-<h1>Hoş Geldiniz</h1>
-<p>Kuaför Yönetim Sistemine Genel Bakış</p>
+    <div class="row mt-5">
+        <!-- Toplam Salon Sayısı -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-body text-center bg-info text-white rounded">
+                    <h5 class="card-title fs-4">Toplam Salon Sayısı</h5>
+                    <p class="card-text display-6 fw-bold">@Model?.ToplamSalonSayisi ?? 0</p>
+                </div>
+            </div>
+        </div>
 
-<div class="summary">
-    <h3>Toplam Salon Sayısı: @ViewData["SalonSayisi"]</h3>
-    <h3>Toplam Çalışan Sayısı: @ViewData["CalisanSayisi"]</h3>
-    <h3>Toplam Randevu Sayısı: @ViewData["RandevuSayisi"]</h3>
+        <!-- Toplam Çalışan Sayısı -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-body text-center bg-success text-white rounded">
+                    <h5 class="card-title fs-4">Toplam Çalışan Sayısı</h5>
+                    <p class="card-text display-6 fw-bold">@Model?.ToplamCalisanSayisi ?? 0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toplam Randevu Sayısı -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-body text-center bg-danger text-white rounded">
+                    <h5 class="card-title fs-4">Toplam Randevu Sayısı</h5>
+                    <p class="card-text display-6 fw-bold">@Model?.ToplamRandevuSayisi ?? 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ek Bilgi veya Hareket Butonları -->
+    <div class="mt-4">
+        <p class="text-muted">Kuaför ve berber salonlarınızı, çalışanlarınızı ve randevularınızı yönetmek için bu sistemden faydalanabilirsiniz.</p>
+        <a href="/Salonlar" class="btn btn-primary btn-lg me-2">Salonları Yönet</a>
+        <a href="/Randevular" class="btn btn-outline-secondary btn-lg">Randevuları Gör</a>
+    </div>
 </div>
-
-<p>Kuaför ve berber salonlarını, çalışanları ve randevuları yönetmek için bu sistemden faydalanabilirsiniz.</p>
