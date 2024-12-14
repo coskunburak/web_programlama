@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - web_programlama</title>
+    <title>@ViewData["Title"] - Web Programlama</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" /> <!-- Custom styling -->
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     <link rel="icon" type="image/x-icon" href="~/img/favicon.ico" />
 </head>
 <body class="bg-light">
@@ -16,11 +16,14 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web Programlama</a>
+                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-code-square me-2"></i>Web Programlama
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Navigation Links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
@@ -41,25 +44,31 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
                         </li>
                     </ul>
+
+                    <!-- Authentication Links -->
                     <ul class="navbar-nav ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i> @User.Identity.Name
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-2"></i>@User.Identity.Name
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Çıkış Yap</a></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right me-2"></i>Çıkış Yap</a></li>
                             </ul>
                         </li>
                         }
                         else
                         {
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                            <a class="btn btn-outline-primary me-2 px-3 py-2 rounded-pill" asp-controller="Account" asp-action="Login">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Giriş Yap
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+                            <a class="btn btn-primary px-3 py-2 rounded-pill" asp-controller="Account" asp-action="Register">
+                                <i class="bi bi-person-plus me-1"></i>Kayıt Ol
+                            </a>
                         </li>
                         }
                     </ul>
@@ -80,9 +89,9 @@
         <div class="container">
             <p>&copy; 2024 - Web Programlama</p>
             <p>Bize Ulaşın: <a href="mailto:info@webprogramlama.com" class="text-white">info@webprogramlama.com</a></p>
-            <div class="social-icons">
-                <a href="https://twitter.com" class="text-white me-2"><i class="bi bi-twitter"></i></a>
-                <a href="https://facebook.com" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+            <div class="d-flex justify-content-center">
+                <a href="https://twitter.com" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                <a href="https://facebook.com" class="text-white me-3"><i class="bi bi-facebook"></i></a>
                 <a href="https://instagram.com" class="text-white"><i class="bi bi-instagram"></i></a>
             </div>
         </div>

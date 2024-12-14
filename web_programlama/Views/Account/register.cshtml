@@ -1,0 +1,21 @@
+@model RegisterViewModel
+
+<div class="container mt-5">
+    <h2 class="text-center">Kayýt Ol</h2>
+    <form method="post" asp-action="Register">
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" id="Email" name="Email" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Password">Þifre</label>
+            <input type="password" class="form-control" id="Password" name="Password" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="ConfirmPassword">Þifreyi Onayla</label>
+            <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 w-100">Kayýt Ol</button>
+    </form>
+    <p class="text-center mt-3">Zaten bir hesabýnýz var mý? <a asp-action="Login">Giriþ Yap</a></p>
+</div>
