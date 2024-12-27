@@ -28,18 +28,23 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Salon" asp-action="Index">Salonlar</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Yönetim
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-controller="Calisan" asp-action="Index">Çalışanlar</a></li>
-                                <li><a class="dropdown-item" asp-controller="Randevu" asp-action="Index">Randevular</a></li>
-                            </ul>
-                        </li>
+                        @if(User.IsInRole("Admin")){
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Yönetim
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Calisan" asp-action="Index">Çalışanlar</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Randevu" asp-action="Index">Randevular</a></li>
+                                </ul>
+                             
+                            </li>
+                            }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
                         </li>

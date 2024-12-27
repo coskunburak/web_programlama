@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using web_programlama.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web_programlama.Controllers
 {
@@ -12,7 +13,7 @@ namespace web_programlama.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "User, Admin")]
         public IActionResult Index()
         {
             var salonlar = _context.Salonlar.ToList();

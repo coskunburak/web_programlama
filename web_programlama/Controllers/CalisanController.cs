@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using web_programlama.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace web_programlama.Controllers
 {
@@ -29,15 +30,32 @@ namespace web_programlama.Controllers
 
         public IActionResult Create()
         {
+            List<SelectListItem> categorySelectList = _context.Salonlar.ToList()
+                .Select(salon => new SelectListItem
+                {
+                    Value = salon.Id.ToString(),
+                    Text = salon.Ad
+                })
+                .ToList();
+
+            ViewBag.Salonlar = categorySelectList;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Calisan calisan)
+        public IActionResult Create(CalisanDTO calisan)
         {
             if (ModelState.IsValid)
             {
-                _context.Calisanlar.Add(calisan);
+                Calisan yeni = new Calisan()
+                {
+                    Ad = calisan.Ad,
+                    SalonId = calisan.SalonId,
+                    UygunlukSaatleri = calisan.UygunlukSaatleri,
+                    UzmanlikAlani = calisan.UzmanlikAlani
+                };
+
+                _context.Calisanlar.Add(yeni);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
