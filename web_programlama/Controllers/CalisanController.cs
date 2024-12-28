@@ -50,9 +50,9 @@ namespace web_programlama.Controllers
                 Calisan yeni = new Calisan()
                 {
                     Ad = calisan.Ad,
-                    SalonId = calisan.SalonId,
                     UygunlukSaatleri = calisan.UygunlukSaatleri,
-                    UzmanlikAlani = calisan.UzmanlikAlani
+                    UzmanlikAlani = calisan.UzmanlikAlani,
+                    SalonId = calisan.SalonId,
                 };
 
                 _context.Calisanlar.Add(yeni);

@@ -1,5 +1,6 @@
 ﻿using web_programlama.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web_programlama.Models
 {
@@ -10,10 +11,11 @@ namespace web_programlama.Models
         public string? UzmanlikAlani { get; set; }
         public string? UygunlukSaatleri { get; set; }
 
+        [ForeignKey("Salon")]
         public int? SalonId { get; set; }
-        public Salon? Salon { get; set; } = new Salon();
+        public Salon? Salon { get; set; }
 
-        public ICollection<Islem>? Islemler { get; set; } = new List<Islem>();
+        public ICollection<Islem>? Islemler { get; set; }
     }
 
 
