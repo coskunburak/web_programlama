@@ -32,7 +32,12 @@ namespace web_programlama.Controllers
         public IActionResult Create()
         {
             var randevular = _context.Randevular.Include(r => r.Calisan).Include(r => r.Islem).ToList();
-            return View(randevular);
+
+            ViewBag.Calisanlar = randevular.Select(r => new SelectListItem { Value = r.CalisanId.ToString(), Text = r.Calisan.Ad});
+            //ViewBag.Islemler = randevular.Select(r => new SelectListItem { Value = r.Islem.Id.ToString(), Text = r.Islem.Ad});
+            ViewBag.KullaniciIdler = randevular.Select(r => new SelectListItem { Value = r.KullaniciId, Text = r.KullaniciId });
+
+            return View();
         }
 
 
