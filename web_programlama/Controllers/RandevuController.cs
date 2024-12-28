@@ -2,6 +2,7 @@
 using web_programlama.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace web_programlama.Controllers
 {
@@ -30,34 +31,8 @@ namespace web_programlama.Controllers
 
         public IActionResult Create()
         {
-            // Çalışanlar
-            ViewBag.Calisanlar = _context.Calisanlar
-                                        .Select(c => new SelectListItem
-                                        {
-                                            Value = c.Id.ToString(),
-                                            Text = c.Ad
-                                        })
-                                        .ToList();
-
-            // İşlemler (Hizmetler)
-            ViewBag.Islemler = _context.Islemler
-                                       .Select(i => new SelectListItem
-                                       {
-                                           Value = i.Id.ToString(),
-                                           Text = i.Ad
-                                       })
-                                       .ToList();
-
-            // Müşteriler
-            ViewBag.Kullanicilar = _context.Users
-                                           .Select(u => new SelectListItem
-                                           {
-                                               Value = u.Id.ToString(),
-                                               Text = $"{u.UserName} ({u.Email})"
-                                           })
-                                           .ToList();
-
-            return View();
+            var randevular = _context.Randevular.Include(r => r.Calisan).Include(r => r.Islem).ToList();
+            return View(randevular);
         }
 
 

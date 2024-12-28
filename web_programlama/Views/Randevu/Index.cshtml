@@ -1,4 +1,4 @@
-﻿@model IEnumerable<web_programlama.Models.Randevu>
+﻿@model IEnumerable<Randevu>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.RandevuZamani)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Islem)
+                @Html.DisplayNameFor(model => model.IslemId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calisan)
+                @Html.DisplayNameFor(model => model.CalisanId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.KullaniciId)
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RandevuZamani)
+                @item.RandevuZamani
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Islem.Id)
+                @item.IslemId
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Calisan.Id)
+                @item.CalisanId
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KullaniciId)
+                @item.KullaniciId
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
