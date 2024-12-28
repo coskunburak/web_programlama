@@ -67,6 +67,7 @@ namespace web_programlama.Controllers
             var calisan = _context.Calisanlar.Find(id);
             if (calisan == null)
                 return NotFound();
+            ViewBag.SalonId = new SelectList(_context.Salonlar, "Id", "Ad");
             return View(calisan);
         }
 
@@ -79,6 +80,7 @@ namespace web_programlama.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.SalonId = new SelectList(_context.Salonlar, "Id", "Ad");
             return View(calisan);
         }
 
