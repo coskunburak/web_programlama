@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using web_programlama.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace web_programlama.Controllers
 {
@@ -29,14 +30,43 @@ namespace web_programlama.Controllers
 
         public IActionResult Create()
         {
+            // Çalışanlar
+            ViewBag.Calisanlar = _context.Calisanlar
+                                        .Select(c => new SelectListItem
+                                        {
+                                            Value = c.Id.ToString(),
+                                            Text = c.Ad
+                                        })
+                                        .ToList();
+
+            // İşlemler (Hizmetler)
+            ViewBag.Islemler = _context.Islemler
+                                       .Select(i => new SelectListItem
+                                       {
+                                           Value = i.Id.ToString(),
+                                           Text = i.Ad
+                                       })
+                                       .ToList();
+
+            // Müşteriler
+            ViewBag.Kullanicilar = _context.Users
+                                           .Select(u => new SelectListItem
+                                           {
+                                               Value = u.Id.ToString(),
+                                               Text = $"{u.UserName} ({u.Email})"
+                                           })
+                                           .ToList();
+
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Create(Randevu randevu)
         {
             if (ModelState.IsValid)
             {
+                randevu.RandevuZamani = DateTime.SpecifyKind(randevu.RandevuZamani, DateTimeKind.Utc);
                 _context.Randevular.Add(randevu);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
