@@ -31,11 +31,10 @@ namespace web_programlama.Controllers
 
         public IActionResult Create()
         {
-            var randevular = _context.Randevular.Include(r => r.Calisan).Include(r => r.Islem).ToList();
 
-            ViewBag.Calisanlar = randevular.Select(r => new SelectListItem { Value = r.CalisanId.ToString(), Text = r.Calisan.Ad});
-            //ViewBag.Islemler = randevular.Select(r => new SelectListItem { Value = r.Islem.Id.ToString(), Text = r.Islem.Ad});
-            ViewBag.KullaniciIdler = randevular.Select(r => new SelectListItem { Value = r.KullaniciId, Text = r.KullaniciId });
+            ViewBag.Calisanlar = _context.Calisanlar.Select(r => new SelectListItem { Value = r.Id.ToString(), Text = r.Ad});
+            ViewBag.Islemler = _context.Islemler.Select(r => new SelectListItem { Value = r.Id.ToString(), Text = r.Ad});
+            ViewBag.KullaniciIdler = _context.Users.Select(r => new SelectListItem { Value = r.Id, Text = r.UserName});
 
             return View();
         }
