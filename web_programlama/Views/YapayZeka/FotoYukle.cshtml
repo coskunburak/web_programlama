@@ -1,0 +1,26 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Yapay Zeka Saç Önerisi";
+}
+
+<h1>Yapay Zeka Saç Önerisi</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="FotoYukle" method="post" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+                <label for="file" class="form-label">Bir fotoğraf yükleyin:</label>
+                <input type="file" name="file" class="form-control" id="file" />
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+        </form>
+
+        @if (ViewBag.Hata != null)
+        {
+            <div class="alert alert-danger mt-3">
+                <p>@ViewBag.Hata</p>
+            </div>
+        }
+    </div>
+</div>

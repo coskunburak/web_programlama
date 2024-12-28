@@ -1,0 +1,26 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Yapay Zeka Önerileri";
+}
+
+<h1 class="text-center mt-3">Yapay Zeka Saç Önerileri</h1>
+
+@if (ViewBag.Sonuc != null)
+{
+    <div class="alert alert-success mt-4">
+        <h3 class="text-success">Saç Modeli ve Renk Önerisi:</h3>
+        <pre class="bg-light p-3 border rounded">@ViewBag.Sonuc</pre>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-4">
+        <h4 class="text-warning">Henüz bir sonuç bulunmamaktadır.</h4>
+        <p>Lütfen bir fotoğraf yükleyin ve yeniden deneyin.</p>
+    </div>
+}
+
+<div class="text-center mt-5">
+    <a asp-action="FotoYukle" class="btn btn-primary btn-lg">Yeni Fotoğraf Yükle</a>
+</div>
